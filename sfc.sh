@@ -40,6 +40,7 @@ sudo sh -c 'echo "auto eth1" >> /etc/network/interfaces'
 sudo sh -c 'echo "iface eth1 inet dhcp" >> /etc/network/interfaces'
 sudo /etc/init.d/networking restart && sudo sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
 sudo ip route add ${SOURCE_VM} dev eth0 && sudo ip route add ${DEST_VM} dev eth1
+. $(dirname "${BASH_SOURCE}")/ids.sh
 
 # Inject Firewall configuration into the FW VM
 ssh -T cirros@${FLOATING_IP_FW} -y
@@ -47,4 +48,4 @@ sudo sh -c 'echo "auto eth1" >> /etc/network/interfaces'
 sudo sh -c 'echo "iface eth1 inet dhcp" >> /etc/network/interfaces'
 sudo /etc/init.d/networking restart && sudo sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
 sudo ip route add ${SOURCE_VM_2} dev eth0 && sudo ip route add ${DEST_VM} dev eth1
-
+. $(dirname "${BASH_SOURCE}")/fw.sh
